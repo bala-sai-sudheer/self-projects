@@ -1,0 +1,35 @@
+services:
+  web:
+    image: blood_web
+    container_name: blood_web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./app:/var/www/html
+    depends_on:
+      - db
+    restart: unless-stopped
+
+    # PERMISSIONS
+    command: >
+      bash -c "
+      mkdir -p /var/www/html/assets/uploads &&
+      chown -R www-data:www-data /var/www/html/assets/uploads &&
+      chmod -R 755 /var/www/html/assets/uploads &&
+      apache2-foreground
+      "
+
+  db:
+    image: mysql:8.0
+    container_name: blood_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: blood_app
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+
+volumes:
+  db_data:
+
