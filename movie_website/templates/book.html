@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Confirmation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family:'Roboto', sans-serif;
+            background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+            color:#f1f1f1;
+            margin:0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width:700px;
+            margin:50px auto;
+            background:#1e1e1e;
+            border-radius:12px;
+            padding:40px;
+            box-shadow:0 15px 40px rgba(0,0,0,0.7);
+            text-align:center;
+        }
+        h1 {
+            color:#28a745;
+            margin-bottom:20px;
+            text-shadow:1px 1px 5px #000;
+        }
+        img {
+            width:250px;
+            height:380px;
+            object-fit:cover;
+            border-radius:10px;
+            margin-bottom:20px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.5);
+        }
+        p {
+            font-size:16px;
+            margin:12px 0;
+        }
+        .btn {
+            display:inline-block;
+            margin-top:20px;
+            padding:12px 25px;
+            background:linear-gradient(90deg, #ff3d00, #ff6d00);
+            color:white;
+            text-decoration:none;
+            border-radius:8px;
+            font-weight:bold;
+        }
+        .btn:hover {
+            background:linear-gradient(90deg, #ff6d00, #ff3d00);
+        }
+        .success-msg {
+            background-color:#28a74533;
+            color:#28a745;
+            padding:18px;
+            border-radius:8px;
+            margin-bottom:25px;
+            border:1px solid #28a745;
+            font-size:16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>✅ Booking Successful!</h1>
+    <div class="success-msg">
+        Your movie has been booked at: <b>{{ time }}</b>
+    </div>
+
+    <img src="{{ movies[movie].image }}" alt="{{ movie }}">
+    <p><b>Movie:</b> {{ movie }}</p>
+    <p><b>Tickets:</b> {{ tickets }}</p>
+    <p><b>Location:</b> {{ movies[movie].location }}</p>
+    <p><b>Theatre:</b> {{ movies[movie].theatre }}</p>
+
+    <a href="/" class="btn">Back to Home</a>
+</div>
+
+</body>
+</html>
