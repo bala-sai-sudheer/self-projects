@@ -766,7 +766,7 @@ var products = [
   {id:5, name:"Running Shoes",     price:1799, old:3499, cat:"Fashion",     img:"https://rukminim2.flixcart.com/image/1280/1280/xif0q/shoe/v/f/9/-original-imahfkjab7gqczgp.jpeg?q=90",         stars:4.6, reviews:1897},
   {id:6, name:"Kitchen Set",       price:1999,  old:2999, cat:"Kitchen",        img:"https://www.ikea.com/in/en/images/products/ikea-365-cookware-set-of-6-stainless-steel__1062091_pe850656_s5.jpg?f=xl",       stars:4.1, reviews:321},
   {id:7, name:"Dining Table",        price:1599,  old:3199, cat:"Kitchen",        img:"https://www.ikea.com/in/en/images/products/haegernaes-table-and-4-chairs-antique-stain-pine__1350925_pe951817_s5.jpg?f=xl",          stars:4.4, reviews:654},
-  {id:8, name:"Bhagavad Gita",   price:399,  old:699,  cat:"Books",       img:"https://i0.wp.com/www.iskconbooks.com/wp-content/uploads/2020/10/Eng-cvr-Bhagavad-gita.jpg?resize=768%2C768&ssl=1",         stars:5.0, reviews:10000},
+  {id:8, name:"Bhagavad Gita",   price:399,  old:699,  cat:"Books",       img:"https://i0.wp.com/www.iskconbooks.com/wp-content/uploads/2020/10/Eng-cvr-Bhagavad-gita.jpg?resize=768%2C768&ssl=1",         stars:5.0, reviews:100M+},
   {id:9, name:"Notebooks",          price:299,  old:599,  cat:"Books",       img:"https://5.imimg.com/data5/HK/LF/MY-17842015/school-note-book-1000x1000.jpg",      stars:4.0, reviews:198},
   {id:10,name:"Toy Car",           price:999,  old:1599, cat:"Toys",        img:"https://m.media-amazon.com/images/I/5164gN4xYqL._SX300_SY300_QL70_FMwebp_.jpg",        stars:4.3, reviews:765}
 ];
