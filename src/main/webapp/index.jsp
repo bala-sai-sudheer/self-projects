@@ -6,7 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body { margin:0; font-family:'Segoe UI'; background:#eaeded; }
+body {
+    margin:0;
+    font-family: 'Segoe UI', Arial;
+    background:#eaeded;
+}
 
 /* HEADER */
 .header {
@@ -16,34 +20,41 @@ body { margin:0; font-family:'Segoe UI'; background:#eaeded; }
     display:flex;
     align-items:center;
 }
-.logo { color:#ff9900; font-size:22px; font-weight:bold; cursor:pointer; }
+.logo {
+    color:#ff9900;
+    font-size:22px;
+    font-weight:bold;
+    cursor:pointer;
+}
 .search { flex:1; margin:0 20px; }
-.search input { width:100%; padding:10px; border:none; border-radius:5px; }
-
-.cart { position:relative; cursor:pointer; }
-
-/* CART DROPDOWN */
-.cart-box {
-    position:absolute;
-    right:0;
-    top:30px;
-    background:white;
-    color:black;
-    width:250px;
-    display:none;
+.search input {
+    width:100%;
     padding:10px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.3);
+    border-radius:5px;
+    border:none;
 }
 
 /* NAV */
-.nav { background:#232f3e; color:white; padding:10px 20px; }
-.nav span { margin-right:20px; cursor:pointer; }
+.nav {
+    background:#232f3e;
+    color:white;
+    padding:10px 20px;
+}
+.nav span {
+    margin-right:20px;
+    cursor:pointer;
+    font-size:14px;
+}
+.nav span:hover {
+    text-decoration:underline;
+}
 
 /* HERO */
 .hero {
     background:linear-gradient(to right,#ff9900,#ffcc66);
     text-align:center;
     padding:20px;
+    font-weight:bold;
 }
 
 /* GRID */
@@ -60,11 +71,14 @@ body { margin:0; font-family:'Segoe UI'; background:#eaeded; }
     padding:15px;
     border-radius:10px;
     box-shadow:0 2px 10px rgba(0,0,0,0.1);
-    position:relative;
     transition:0.3s;
+    position:relative;
 }
-.card:hover { transform:translateY(-5px); }
+.card:hover {
+    transform:translateY(-5px);
+}
 
+/* IMAGE */
 .card img {
     width:100%;
     height:150px;
@@ -72,6 +86,7 @@ body { margin:0; font-family:'Segoe UI'; background:#eaeded; }
     border-radius:8px;
 }
 
+/* BADGE */
 .badge {
     position:absolute;
     top:10px;
@@ -80,23 +95,43 @@ body { margin:0; font-family:'Segoe UI'; background:#eaeded; }
     color:white;
     padding:5px;
     font-size:12px;
+    border-radius:4px;
 }
 
-.price { color:#B12704; font-weight:bold; }
-.old { text-decoration:line-through; color:gray; font-size:12px; }
+/* TEXT */
+.card h3 {
+    margin:10px 0 5px;
+}
+.card p {
+    margin:3px 0;
+    font-size:14px;
+}
 
-.stars { color:#ff9900; }
+/* PRICE */
+.price {
+    color:#B12704;
+    font-weight:bold;
+    font-size:16px;
+}
+.old {
+    text-decoration:line-through;
+    color:gray;
+    font-size:12px;
+}
 
+/* BUTTON */
 .card button {
-    margin-top:5px;
+    margin-top:10px;
     width:100%;
     padding:8px;
+    background:#ffd814;
     border:none;
     border-radius:5px;
     cursor:pointer;
 }
-.cart-btn { background:#ffd814; }
-.wish-btn { background:#ff4081; color:white; }
+.card button:hover {
+    background:#f7ca00;
+}
 
 /* FOOTER */
 .footer {
@@ -113,15 +148,10 @@ body { margin:0; font-family:'Segoe UI'; background:#eaeded; }
 <!-- HEADER -->
 <div class="header">
     <div class="logo" onclick="loadProducts()">YourStore</div>
-
     <div class="search">
-        <input placeholder="Search..." onkeyup="search(this.value)">
+        <input placeholder="Search products..." onkeyup="search(this.value)">
     </div>
-
-    <div class="cart" onclick="toggleCart()">
-        🛒 <span id="count">0</span>
-        <div class="cart-box" id="cartBox"></div>
-    </div>
+    <div>🛒 <span id="count">0</span></div>
 </div>
 
 <!-- NAV -->
@@ -135,32 +165,37 @@ body { margin:0; font-family:'Segoe UI'; background:#eaeded; }
 </div>
 
 <!-- HERO -->
-<div class="hero">☀️ Summer Sale - Up to 60% OFF</div>
+<div class="hero">
+    ☀️ Summer Sale - Up to 60% OFF
+</div>
 
 <!-- PRODUCTS -->
 <div id="grid" class="grid"></div>
 
 <!-- FOOTER -->
 <div class="footer">
-YourStore Pvt Ltd<br>
-support@yourstore.com<br>
-+91 98765 43210
+    YourStore Pvt Ltd<br>
+    support@yourstore.com<br>
+    +91 98765 43210
 </div>
 
 <script>
 
-/* DATA */
+/* PRODUCT DATA */
 var products = [
-{id:1,name:"Headphones",price:1499,old:2999,cat:"Electronics",rating:4},
-{id:2,name:"Jacket",price:1999,old:3999,cat:"Fashion",rating:4},
-{id:3,name:"Kitchen Set",price:999,old:1999,cat:"Home",rating:3},
-{id:4,name:"Book",price:399,old:699,cat:"Books",rating:5},
-{id:5,name:"Toy Car",price:699,old:1299,cat:"Toys",rating:4}
+ {id:1,name:"Headphones",price:1499,old:2999,cat:"Electronics"},
+ {id:2,name:"Bluetooth Speaker",price:1299,old:2499,cat:"Electronics"},
+ {id:3,name:"Smart Watch",price:1999,old:3999,cat:"Electronics"},
+ {id:4,name:"Jacket",price:1999,old:3999,cat:"Fashion"},
+ {id:5,name:"Shoes",price:1799,old:3499,cat:"Fashion"},
+ {id:6,name:"Kitchen Set",price:999,old:1999,cat:"Home"},
+ {id:7,name:"Table Lamp",price:599,old:1199,cat:"Home"},
+ {id:8,name:"Book",price:399,old:699,cat:"Books"},
+ {id:9,name:"Notebook",price:299,old:599,cat:"Books"},
+ {id:10,name:"Toy Car",price:699,old:1299,cat:"Toys"}
 ];
 
-/* CART + STORAGE */
-var cart = JSON.parse(localStorage.getItem("cart")) || [];
-var wishlist = [];
+var cart = 0;
 
 /* RENDER */
 function loadProducts(list) {
@@ -169,85 +204,51 @@ function loadProducts(list) {
     grid.innerHTML = "";
 
     data.forEach(function(p) {
-        var discount = Math.round((1 - p.price/p.old)*100);
 
-        var stars = "⭐".repeat(p.rating);
+        var discount = Math.round((1 - p.price/p.old)*100);
 
         var div = document.createElement("div");
         div.className = "card";
 
         div.innerHTML =
-            "<div class='badge'>-"+discount+"%</div>" +
-            "<img src='https://source.unsplash.com/300x200/?"+p.name+"'>" +
-            "<h3>"+p.name+"</h3>" +
-            "<p>"+p.cat+"</p>" +
-            "<p class='price'>₹"+p.price+" <span class='old'>₹"+p.old+"</span></p>" +
-            "<p class='stars'>"+stars+"</p>" +
-            "<button class='cart-btn' onclick='addCart("+p.id+")'>Add to Cart</button>" +
-            "<button class='wish-btn' onclick='addWish("+p.id+")'>❤ Wishlist</button>";
+            "<div class='badge'>-" + discount + "%</div>" +
+            "<img src='https://source.unsplash.com/300x200/?" + p.name + "'>" +
+            "<h3>" + p.name + "</h3>" +
+            "<p>" + p.cat + "</p>" +
+            "<p class='price'>₹" + p.price +
+            " <span class='old'>₹" + p.old + "</span></p>" +
+            "<button onclick='addCart()'>Add to Cart</button>";
 
         grid.appendChild(div);
     });
 }
 
 /* CART */
-function addCart(id) {
-    var item = cart.find(p => p.id === id);
-
-    if(item) item.qty++;
-    else {
-        var product = products.find(p => p.id === id);
-        cart.push({...product, qty:1});
-    }
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCart();
-}
-
-/* UPDATE CART */
-function updateCart() {
-    var total = 0;
-    var box = document.getElementById("cartBox");
-    box.innerHTML = "";
-
-    cart.forEach(p => {
-        total += p.qty;
-        box.innerHTML += p.name + " x" + p.qty + "<br>";
-    });
-
-    document.getElementById("count").innerText = total;
-}
-
-/* CART TOGGLE */
-function toggleCart() {
-    var box = document.getElementById("cartBox");
-    box.style.display = box.style.display === "block" ? "none" : "block";
-}
-
-/* WISHLIST */
-function addWish(id) {
-    if(!wishlist.includes(id)) {
-        wishlist.push(id);
-        alert("Added to Wishlist");
-    }
+function addCart() {
+    cart++;
+    document.getElementById("count").innerText = cart;
 }
 
 /* FILTER */
 function filter(cat) {
-    if(cat==="All") loadProducts(products);
-    else loadProducts(products.filter(p=>p.cat===cat));
+    if (cat === "All") {
+        loadProducts(products);
+    } else {
+        loadProducts(products.filter(p => p.cat === cat));
+    }
 }
 
 /* SEARCH */
 function search(txt) {
     txt = txt.toLowerCase();
-    loadProducts(products.filter(p=>p.name.toLowerCase().includes(txt)));
+    loadProducts(products.filter(p =>
+        p.name.toLowerCase().includes(txt)
+    ));
 }
 
 /* INIT */
-window.onload = function() {
+window.onload = function () {
     loadProducts(products);
-    updateCart();
 };
 
 </script>
