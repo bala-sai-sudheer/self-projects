@@ -181,7 +181,7 @@ body {
 
 <script>
 
-/* PRODUCT DATA */
+/* DATA */
 var products = [
  {id:1,name:"Headphones",price:1499,old:2999,cat:"Electronics"},
  {id:2,name:"Bluetooth Speaker",price:1299,old:2499,cat:"Electronics"},
@@ -195,7 +195,8 @@ var products = [
  {id:10,name:"Toy Car",price:699,old:1299,cat:"Toys"}
 ];
 
-var cart = 0;
+/* CART (persistent) */
+var cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 /* RENDER */
 function loadProducts(list) {
@@ -217,16 +218,50 @@ function loadProducts(list) {
             "<p>" + p.cat + "</p>" +
             "<p class='price'>₹" + p.price +
             " <span class='old'>₹" + p.old + "</span></p>" +
-            "<button onclick='addCart()'>Add to Cart</button>";
+            "<button id='btn-" + p.id + "' onclick='addCart(" + p.id + ")'>Add to Cart</button>";
 
         grid.appendChild(div);
+
+        // restore button state
+        updateButton(p.id);
     });
 }
 
-/* CART */
-function addCart() {
-    cart++;
-    document.getElementById("count").innerText = cart;
+/* ADD CART */
+function addCart(id) {
+    var item = cart.find(p => p.id === id);
+
+    if(item) item.qty++;
+    else {
+        var product = products.find(p => p.id === id);
+        cart.push({...product, qty:1});
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCart();
+    updateButton(id);
+}
+
+/* UPDATE CART COUNT */
+function updateCart() {
+    var total = 0;
+    cart.forEach(p => total += p.qty);
+    document.getElementById("count").innerText = total;
+}
+
+/* BUTTON STATE */
+function updateButton(id) {
+    var item = cart.find(p => p.id === id);
+    var btn = document.getElementById("btn-" + id);
+
+    if(!btn || !item) return;
+
+    if(item.qty === 1) {
+        btn.innerText = "✓ Added";
+        btn.style.background = "#90ee90";
+    } else {
+        btn.innerText = "Qty: " + item.qty;
+    }
 }
 
 /* FILTER */
@@ -249,6 +284,7 @@ function search(txt) {
 /* INIT */
 window.onload = function () {
     loadProducts(products);
+    updateCart();
 };
 
 </script>
