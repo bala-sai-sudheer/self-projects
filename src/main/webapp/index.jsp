@@ -759,7 +759,7 @@ body {
    (Unsplash /300x200/?query is deprecated)
 ───────────────────────────────────────── */
 var products = [
-  {id:1, name:"Headphones",        price:1499, old:2999, cat:"Electronics", img:"https://www.apple.com/newsroom/images/product/airpods/standard/apple_airpods-max_hero_12082020_big.jpg.large_2x.jpg/400/300",    stars:4.5, reviews:1234},
+  {id:1, name:"Headphones",        price:1499, old:2999, cat:"Electronics", img:"https://www.apple.com/newsroom/images/product/airpods/standard/apple_airpods-max_hero_12082020_big.jpg.large_2x.jpg",    stars:4.5, reviews:1234},
   {id:2, name:"Bluetooth Speaker", price:1299, old:2499, cat:"Electronics", img:"https://picsum.photos/seed/speaker/400/300",       stars:4.3, reviews:876},
   {id:3, name:"Smart Watch",       price:1999, old:3999, cat:"Electronics", img:"https://picsum.photos/seed/smartwatch/400/300",    stars:4.7, reviews:2103},
   {id:4, name:"Jacket",            price:1999, old:3999, cat:"Fashion",     img:"https://picsum.photos/seed/jacket/400/300",        stars:4.2, reviews:543},
