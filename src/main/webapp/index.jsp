@@ -759,16 +759,16 @@ body {
    (Unsplash /300x200/?query is deprecated)
 ───────────────────────────────────────── */
 var products = [
-  {id:1, name:"Headphones",        price:1499, old:2999, cat:"Electronics", img:"https://www.apple.com/newsroom/images/product/airpods/standard/apple_airpods-max_hero_12082020_big.jpg.large_2x.jpg",    stars:4.5, reviews:1234},
-  {id:2, name:"Bluetooth Speaker", price:1299, old:2499, cat:"Electronics", img:"https://picsum.photos/seed/speaker/400/300",       stars:4.3, reviews:876},
-  {id:3, name:"Smart Watch",       price:1999, old:3999, cat:"Electronics", img:"https://picsum.photos/seed/smartwatch/400/300",    stars:4.7, reviews:2103},
-  {id:4, name:"Jacket",            price:1999, old:3999, cat:"Fashion",     img:"https://picsum.photos/seed/jacket/400/300",        stars:4.2, reviews:543},
-  {id:5, name:"Running Shoes",     price:1799, old:3499, cat:"Fashion",     img:"https://picsum.photos/seed/shoes/400/300",         stars:4.6, reviews:1897},
-  {id:6, name:"Kitchen Set",       price:999,  old:1999, cat:"Kitchen",        img:"https://picsum.photos/seed/kitchen/400/300",       stars:4.1, reviews:321},
-  {id:7, name:"Table Lamp",        price:599,  old:1199, cat:"Kitchen",        img:"https://picsum.photos/seed/lamp/400/300",          stars:4.4, reviews:654},
-  {id:8, name:"Design Thinking",   price:399,  old:699,  cat:"Books",       img:"https://picsum.photos/seed/book1/400/300",         stars:4.8, reviews:432},
-  {id:9, name:"Notebook",          price:299,  old:599,  cat:"Books",       img:"https://picsum.photos/seed/notebook/400/300",      stars:4.0, reviews:198},
-  {id:10,name:"Toy Car",           price:699,  old:1299, cat:"Toys",        img:"https://picsum.photos/seed/toycar/400/300",        stars:4.3, reviews:765}
+  {id:1, name:"Headphones",        price:5499, old:9999, cat:"Electronics", img:"https://www.apple.com/newsroom/images/product/airpods/standard/apple_airpods-max_hero_12082020_big.jpg.large_2x.jpg",    stars:4.5, reviews:1234},
+  {id:2, name:"Bluetooth Speaker", price:4999, old:9999, cat:"Electronics", img:"https://www.apple.com/newsroom/images/product/homepod/standard/Apple_homepod-mini-white-10132020_big.jpg.large_2x.jpg",       stars:4.3, reviews:876},
+  {id:3, name:"Smart Watch",       price:5999, old:9999, cat:"Electronics", img:"https://www.apple.com/newsroom/images/product/watch/standard/Apple_watch-series7_hero_09142021_big.jpg.large_2x.jpg",    stars:4.7, reviews:2103},
+  {id:4, name:"Jacket",            price:1999, old:3999, cat:"Fashion",     img:"https://static.zara.net/assets/public/1424/00b6/781849c6930a/141805fe5ad7/00562602700-e1/00562602700-e1.jpg?ts=1770018371850&w=1024",        stars:4.2, reviews:543},
+  {id:5, name:"Running Shoes",     price:1799, old:3499, cat:"Fashion",     img:"https://rukminim2.flixcart.com/image/1280/1280/xif0q/shoe/v/f/9/-original-imahfkjab7gqczgp.jpeg?q=90",         stars:4.6, reviews:1897},
+  {id:6, name:"Kitchen Set",       price:1999,  old:2999, cat:"Kitchen",        img:"https://www.ikea.com/in/en/images/products/ikea-365-cookware-set-of-6-stainless-steel__1062091_pe850656_s5.jpg?f=xl",       stars:4.1, reviews:321},
+  {id:7, name:"Dining Table",        price:1599,  old:3199, cat:"Kitchen",        img:"https://www.ikea.com/in/en/images/products/haegernaes-table-and-4-chairs-antique-stain-pine__1350925_pe951817_s5.jpg?f=xl",          stars:4.4, reviews:654},
+  {id:8, name:"Bhagavad Gita",   price:399,  old:699,  cat:"Books",       img:"https://i0.wp.com/www.iskconbooks.com/wp-content/uploads/2020/10/Eng-cvr-Bhagavad-gita.jpg?resize=768%2C768&ssl=1",         stars:5.0, reviews:10000},
+  {id:9, name:"Notebooks",          price:299,  old:599,  cat:"Books",       img:"https://5.imimg.com/data5/HK/LF/MY-17842015/school-note-book-1000x1000.jpg",      stars:4.0, reviews:198},
+  {id:10,name:"Toy Car",           price:999,  old:1599, cat:"Toys",        img:"https://m.media-amazon.com/images/I/5164gN4xYqL._SX300_SY300_QL70_FMwebp_.jpg",        stars:4.3, reviews:765}
 ];
 
 /* Category emoji fallback icons */
