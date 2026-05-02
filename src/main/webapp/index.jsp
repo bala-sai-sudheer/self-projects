@@ -691,7 +691,7 @@ body {
   <button class="nav-item active" data-cat="All">All</button>
   <button class="nav-item" data-cat="Electronics">Electronics</button>
   <button class="nav-item" data-cat="Fashion">Fashion</button>
-  <button class="nav-item" data-cat="Home">Home</button>
+  <button class="nav-item" data-cat="Kitchen">Kitchen</button>
   <button class="nav-item" data-cat="Books">Books</button>
   <button class="nav-item" data-cat="Toys">Toys</button>
 </nav>
@@ -759,13 +759,13 @@ body {
    (Unsplash /300x200/?query is deprecated)
 ───────────────────────────────────────── */
 var products = [
-  {id:1, name:"Headphones",        price:1499, old:2999, cat:"Electronics", img:"https://picsum.photos/seed/headphones/400/300",    stars:4.5, reviews:1234},
+  {id:1, name:"Headphones",        price:1499, old:2999, cat:"Electronics", img:"https://www.apple.com/newsroom/images/product/airpods/standard/apple_airpods-max_hero_12082020_big.jpg.large_2x.jpg/400/300",    stars:4.5, reviews:1234},
   {id:2, name:"Bluetooth Speaker", price:1299, old:2499, cat:"Electronics", img:"https://picsum.photos/seed/speaker/400/300",       stars:4.3, reviews:876},
   {id:3, name:"Smart Watch",       price:1999, old:3999, cat:"Electronics", img:"https://picsum.photos/seed/smartwatch/400/300",    stars:4.7, reviews:2103},
   {id:4, name:"Jacket",            price:1999, old:3999, cat:"Fashion",     img:"https://picsum.photos/seed/jacket/400/300",        stars:4.2, reviews:543},
   {id:5, name:"Running Shoes",     price:1799, old:3499, cat:"Fashion",     img:"https://picsum.photos/seed/shoes/400/300",         stars:4.6, reviews:1897},
-  {id:6, name:"Kitchen Set",       price:999,  old:1999, cat:"Home",        img:"https://picsum.photos/seed/kitchen/400/300",       stars:4.1, reviews:321},
-  {id:7, name:"Table Lamp",        price:599,  old:1199, cat:"Home",        img:"https://picsum.photos/seed/lamp/400/300",          stars:4.4, reviews:654},
+  {id:6, name:"Kitchen Set",       price:999,  old:1999, cat:"Kitchen",        img:"https://picsum.photos/seed/kitchen/400/300",       stars:4.1, reviews:321},
+  {id:7, name:"Table Lamp",        price:599,  old:1199, cat:"Kitchen",        img:"https://picsum.photos/seed/lamp/400/300",          stars:4.4, reviews:654},
   {id:8, name:"Design Thinking",   price:399,  old:699,  cat:"Books",       img:"https://picsum.photos/seed/book1/400/300",         stars:4.8, reviews:432},
   {id:9, name:"Notebook",          price:299,  old:599,  cat:"Books",       img:"https://picsum.photos/seed/notebook/400/300",      stars:4.0, reviews:198},
   {id:10,name:"Toy Car",           price:699,  old:1299, cat:"Toys",        img:"https://picsum.photos/seed/toycar/400/300",        stars:4.3, reviews:765}
@@ -773,7 +773,7 @@ var products = [
 
 /* Category emoji fallback icons */
 var catIcon = {
-  Electronics:"🎧", Fashion:"👗", Home:"🏠", Books:"📚", Toys:"🧸"
+  Electronics:"🎧", Fashion:"👗", Kitchen:"🏠", Books:"📚", Toys:"🧸"
 };
 
 /* ─────────────────────────────────────────
