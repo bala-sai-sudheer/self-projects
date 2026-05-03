@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Connect</title>
+    <style>
+        :root{--bg:#fff;--text:#333;--card-bg:#f9f9f9;--border:#e0e0e0;--primary:#667eea;--nav-bg:#f5f5f5;--hover:#e8e8ff}
+        .dark-mode{--bg:#1a1a2e;--text:#e0e0e0;--card-bg:#16213e;--border:#333;--primary:#7c8cf8;--nav-bg:#0f3460;--hover:#1a1a4e}.dark-mode body{background:#1a1a2e}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;justify-content:center;transition:all 0.3s}
+        .container{background:var(--bg);color:var(--text);padding:20px;width:100%;max-width:800px;min-height:100vh;overflow-y:auto;position:relative}
+        .header{text-align:center;margin-bottom:15px;padding:20px 0}
+        .header h1{color:var(--primary);font-size:22px}
+        .dark-toggle{position:absolute;top:8px;right:8px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--text);z-index:5}
+        .online-dot{width:7px;height:7px;background:#4caf50;border-radius:50%;display:inline-block;margin-right:2px}
+        .tabs{display:flex;margin-bottom:10px;border-bottom:2px solid #eee}
+        .tab{flex:1;padding:8px;text-align:center;cursor:pointer;color:#999;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-2px;font-size:12px}
+        .tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+        .form-group{margin-bottom:10px}
+        .form-group input,.form-group textarea{width:100%;padding:8px 10px;border:2px solid var(--border);border-radius:6px;font-size:13px;outline:none;background:var(--bg);color:var(--text)}
+        .form-group input:focus,.form-group textarea:focus{border-color:var(--primary)}
+        .btn{width:100%;padding:10px;background:var(--primary);color:white;border:none;border-radius:6px;font-size:14px;cursor:pointer;font-weight:600}
+        .btn:hover{opacity:0.9}
+        .hidden{display:none !important}
+        .nav{display:flex;gap:3px;margin-bottom:12px;padding:6px;background:var(--nav-bg);border-radius:6px;flex-wrap:wrap}
+        .nav button{padding:8px 12px;border:none;background:transparent;cursor:pointer;color:var(--text);border-radius:6px;font-size:13px;font-weight:500;transition:all 0.2s}
+        .nav button.active{background:var(--primary);color:white}
+        .nav button.logout-btn{background:#ff5252;color:white;margin-left:auto}
+        .card{background:var(--card-bg);border-radius:6px;padding:10px;margin-bottom:6px;border-left:3px solid var(--primary);color:var(--text)}
+        .card .name{font-weight:600;color:var(--primary);font-size:13px}
+        .card .actions{display:flex;gap:8px;margin-top:6px;align-items:center}
+        .card .actions button{background:none;border:none;cursor:pointer;font-size:12px;color:var(--text)}
+        .card .actions .liked{color:#e91e63}
+        .card .comments{margin-top:6px;padding-top:6px;border-top:1px solid var(--border);max-height:120px;overflow-y:auto}
+        .card .comment-item{padding:2px 0;font-size:11px}
+        .card .comment-user{color:var(--primary);font-weight:600}
+        .card .reply-btn{color:var(--primary);font-size:10px;cursor:pointer;margin-top:4px;display:inline-block}
+        .card .reply-box{display:flex;gap:4px;margin-top:4px}
+        .card .reply-box input{flex:1;padding:4px 6px;border:1px solid var(--border);border-radius:4px;font-size:11px;background:var(--bg);color:var(--text)}
+        .card .reply-box button{background:var(--primary);color:white;border:none;border-radius:4px;font-size:10px;cursor:pointer;padding:4px 8px}
+        .card .edit-delete{position:absolute;top:6px;right:6px;display:flex;gap:3px}
+        .card .edit-delete button{background:none;border:none;cursor:pointer;font-size:11px;color:#999}
+        .emoji-picker{position:absolute;bottom:100%;left:0;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:6px;display:flex;gap:4px;flex-wrap:wrap;max-width:180px;z-index:100;box-shadow:0 4px 10px rgba(0,0,0,0.2)}
+        .emoji-picker span{cursor:pointer;font-size:16px;padding:2px}
+        .msg-bubble{padding:6px 10px;border-radius:8px;margin:3px 0;max-width:80%;font-size:12px}
+        .msg-bubble.received{background:var(--primary);color:white}
+        .msg-bubble.sent{background:#e0e0e0;color:#333;margin-left:auto}
+        .error{background:#ffebee;color:#c62828;padding:8px;border-radius:6px;margin-bottom:8px;font-size:12px;text-align:center}
+        .success{background:#e8f5e9;color:#2e7d32;padding:8px;border-radius:6px;margin-bottom:8px;font-size:12px;text-align:center}
+        h4{font-size:14px;margin-bottom:8px;color:var(--text)}
+        .clickable{cursor:pointer;color:var(--primary);text-decoration:underline}
+        .demo-info{text-align:center;margin-top:6px;font-size:10px;color:#999}
+        .edit-input{border:2px solid var(--primary)!important;border-radius:4px;padding:4px 6px;font-size:12px;width:100%;margin:4px 0}
+    
+@media (min-width: 700px) {
+    .container { padding: 30px 40px; }
+    .nav button { font-size: 14px; padding: 10px 16px; }
+    .card { padding: 15px; margin-bottom: 10px; }
+    .header h1 { font-size: 28px; }
+}
+@media (max-width: 400px) {
+    .nav { gap: 2px; }
+    .nav button { padding: 6px 8px; font-size: 11px; }
+}
+
+</style>
+</head>
+<body>
+<div class="container" id="app">
+    <button class="dark-toggle" onclick="toggleDarkMode()" title="Dark mode">🌙</button>
+
+    <div id="authSection">
+        <div class="header"><h1>🚀 Let's Connect</h1><p>Connect with friends</p></div>
+        <div class="tabs">
+            <div class="tab active" id="tabLogin" onclick="switchTab('login')">🔑 Login</div>
+            <div class="tab" id="tabRegister" onclick="switchTab('register')">✨ Register</div>
+        </div>
+        <div id="msgArea"></div>
+        <div id="loginForm">
+            <div class="form-group"><input type="email" id="loginEmail" placeholder="Email" value="john@letsconnect.com"></div>
+            <div class="form-group"><input type="password" id="loginPassword" placeholder="Password" value="John@123"></div>
+            <button class="btn" onclick="login()">Login</button>
+            <div class="demo-info">Demo: john@letsconnect.com / John@123</div>
+        </div>
+        <div id="registerForm" class="hidden">
+            <div class="form-group"><input type="text" id="regFullName" placeholder="Full Name"></div>
+            <div class="form-group"><input type="text" id="regUsername" placeholder="Username"></div>
+            <div class="form-group"><input type="email" id="regEmail" placeholder="Email"></div>
+            <div class="form-group"><input type="password" id="regPassword" placeholder="Password (min 6)"></div>
+            <button class="btn" onclick="register()">Create Account</button>
+        </div>
+    </div>
+
+    <div id="mainSection" class="hidden">
+        <div class="header"><h1>🚀 Let's Connect</h1><p id="welcomeMsg"></p><small><span class="online-dot"></span> Online</small></div>
+        <div id="msgArea2"></div>
+        <div class="nav">
+            <button id="navFeed" class="active" onclick="showTab('feed')">📱 Feed</button>
+            <button id="navPost" onclick="showTab('post')">✏️ Post</button>
+            <button id="navSearch" onclick="showTab('search')">🔍 Search</button>
+            <button id="navMessages" onclick="showTab('messages')">💬 Chat</button>
+            <button id="navProfile" onclick="showTab('profile')">👤 Profile</button>
+            <button class="logout-btn" onclick="confirmLogout()">🚪</button>
+        </div>
+        <div id="feedTab"><h4>📱 Feed</h4><div id="feedContent"></div></div>
+        <div id="postTab" class="hidden"><h4>✏️ New Post</h4>
+            <div class="form-group" style="position:relative">
+                <textarea id="caption" rows="3" placeholder="What's on your mind?"></textarea>
+                <span onclick="toggleEmoji('caption')" style="position:absolute;bottom:8px;right:8px;cursor:pointer;font-size:20px;opacity:0.7">😊</span>
+            </div>
+            <div class="form-group"><input type="text" id="location" placeholder="Location (optional)"></div>
+            <button class="btn" onclick="createPost()">Post</button>
+        </div>
+        <div id="searchTab" class="hidden"><h4>🔍 Search</h4>
+            <div class="form-group"><input type="text" id="searchQuery" placeholder="Type username..." oninput="searchUsers()"></div>
+            <div id="searchResults"></div>
+        </div>
+        <div id="messagesTab" class="hidden">
+            <div id="convList"><h4>💬 Chats</h4><div id="conversationsContent"></div></div>
+            <div id="chatView" class="hidden">
+                <button class="clickable" onclick="backToConv()" style="margin-bottom:5px;">← Back</button>
+                <h4 id="chatUserName"></h4>
+                <div id="chatMessages" style="max-height:250px;overflow-y:auto;margin-bottom:8px;"></div>
+                <div style="display:flex;gap:6px;position:relative">
+                    <input type="text" id="chatInput" placeholder="Message..." style="flex:1;" onkeydown="if(event.key==='Enter')sendMsg()">
+                    <span onclick="toggleEmoji('chatInput')" style="cursor:pointer;font-size:20px;align-self:center">😊</span>
+                    <button class="btn" style="width:auto;padding:6px 12px;" onclick="sendMsg()">Send</button>
+                </div>
+            </div>
+        </div>
+        <div id="profileTab" class="hidden"><h4>👤 Profile</h4><div id="profileContent"></div></div>
+    </div>
+</div>
+
+<script>
+const HOST=window.location.hostname,API='http://'+HOST+':5000/api';
+var token=null,user=null,chatUser=null,allUsers=[];
+const EMOJIS=['😀','😂','❤️','👍','🔥','🎉','😍','💯','🙏','😢','😡','🤔','👋','💪','✨','🌟','😊','🙌','💕','👏'];
+
+// Dark mode
+if(localStorage.getItem('darkMode')==='true'){document.body.classList.add('dark-mode');document.querySelector('.dark-toggle').textContent='☀️'}
+function toggleDarkMode(){var d=document.body.classList.toggle('dark-mode');document.querySelector('.dark-toggle').textContent=d?'☀️':'🌙';localStorage.setItem('darkMode',d)}
+
+// Emoji
+function toggleEmoji(id){
+    var old=document.getElementById('emojiPicker');if(old)old.remove();
+    var inp=document.getElementById(id);if(!inp)return;
+    var p=document.createElement('div');p.id='emojiPicker';p.className='emoji-picker';
+    EMOJIS.forEach(function(e){var s=document.createElement('span');s.textContent=e;s.onclick=function(){inp.value+=e;p.remove();inp.focus()};p.appendChild(s)});
+    var c=document.createElement('span');c.textContent='✖';c.style.cssText='cursor:pointer;font-size:12px;position:absolute;top:1px;right:3px;color:#999';c.onclick=function(){p.remove()};p.appendChild(c);
+    inp.parentElement.style.position='relative';inp.parentElement.appendChild(p);
+    setTimeout(function(){document.addEventListener('click',function f(e){if(!p.contains(e.target)&&e.target!==inp){p.remove();document.removeEventListener('click',f)}})},50)
+}
+
+function msg(id,m,t){var e=document.getElementById(id);if(!e)return;e.innerHTML='<div class="'+t+'">'+m+'</div>';setTimeout(function(){e.innerHTML=''},3500)}
+function switchTab(t){document.getElementById('tabLogin').classList.toggle('active',t==='login');document.getElementById('tabRegister').classList.toggle('active',t==='register');document.getElementById('loginForm').classList.toggle('hidden',t!=='login');document.getElementById('registerForm').classList.toggle('hidden',t!=='register');document.getElementById('msgArea').innerHTML=''}
+
+function clearSession(){token=null;user=null;chatUser=null;allUsers=[];['feedContent','searchResults','conversationsContent','chatMessages','profileContent'].forEach(function(id){var e=document.getElementById(id);if(e)e.innerHTML=''});var cv=document.getElementById('chatView'),cl=document.getElementById('convList');if(cv)cv.classList.add('hidden');if(cl)cl.classList.remove('hidden')}
+function showMain(){document.getElementById('authSection').classList.add('hidden');document.getElementById('mainSection').classList.remove('hidden');document.getElementById('welcomeMsg').textContent='Welcome, '+user.fullName+'! (@'+user.username+')';showTab('feed')}
+function confirmLogout(){if(confirm('Logout?'))logout()}
+function logout(){clearSession();['loginEmail','loginPassword','regFullName','regUsername','regEmail','regPassword'].forEach(function(id){var e=document.getElementById(id);if(e)e.value=''});document.getElementById('authSection').classList.remove('hidden');document.getElementById('mainSection').classList.add('hidden');switchTab('login')}
+
+function showTab(t){
+    ['feedTab','postTab','searchTab','messagesTab','profileTab'].forEach(function(id){document.getElementById(id).classList.add('hidden')});
+    ['navFeed','navPost','navSearch','navMessages','navProfile'].forEach(function(id){document.getElementById(id).classList.remove('active')});
+    document.getElementById(t+'Tab').classList.remove('hidden');
+    var cap=t.charAt(0).toUpperCase()+t.slice(1);
+    document.getElementById('nav'+cap).classList.add('active');
+    if(t==='feed')loadFeed();
+    if(t==='profile')loadProfile();
+    if(t==='messages')loadConversations();
+}
+
+async function login(){
+    var em=document.getElementById('loginEmail').value.trim(),pw=document.getElementById('loginPassword').value;
+    if(!em||!pw){msg('msgArea','Fill fields','error');return}
+    clearSession();
+    try{
+        var r=await fetch(API+'/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,password:pw})});
+        var j=await r.json();
+        if(r.ok&&j.token){token=j.token;user=j.user;showMain();msg('msgArea2','Welcome!','success')}
+        else msg('msgArea',j.message||'Invalid','error')
+    }catch(e){msg('msgArea','Connection error','error')}
+}
+
+async function register(){
+    var d={fullName:document.getElementById('regFullName').value.trim(),username:document.getElementById('regUsername').value.trim(),email:document.getElementById('regEmail').value.trim(),password:document.getElementById('regPassword').value};
+    if(!d.fullName||!d.username||!d.email||!d.password){msg('msgArea','Fill fields','error');return}
+    if(d.password.length<6){msg('msgArea','Password too short','error');return}
+    clearSession();
+    try{
+        var r=await fetch(API+'/auth/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
+        var j=await r.json();
+        if(r.ok&&j.token){token=j.token;user=j.user;showMain();msg('msgArea2','Welcome!','success')}
+        else msg('msgArea',j.message||'Failed','error')
+    }catch(e){msg('msgArea','Connection error','error')}
+}
+
+function renderPost(x){
+    var isOwner=user&&x.user&&x.user.id===user.id;
+    var ch='';
+    if(x.comments&&x.comments.length>0){ch='<div class="comments">'+x.comments.map(function(c){return'<div class="comment-item"><span class="comment-user">'+c.user.username+'</span> '+esc(c.content)+'</div>'}).join('')+'</div>'}
+    return'<div class="card" style="position:relative" id="post-'+x.id+'">'+
+        (isOwner?'<div class="edit-delete"><button onclick="editPost(\''+x.id+'\')" title="Edit">✏️</button><button onclick="deletePost(\''+x.id+'\')" title="Delete">🗑</button></div>':'')+
+        '<div class="name"><span class="online-dot"></span>👤 '+esc(x.user.username)+'</div>'+
+        '<div id="cap-'+x.id+'">'+esc(x.caption||'')+'</div>'+
+        (x.location?'<div style="color:#999;font-size:10px;">📍 '+esc(x.location)+'</div>':'')+
+        ch+
+        '<div class="actions"><button class="'+(x.isLiked?'liked':'')+'" onclick="toggleLike(\''+x.id+'\')">'+(x.isLiked?'❤️':'🤍')+' <span id="lc-'+x.id+'">'+(x.likeCount||0)+'</span></button><span style="font-size:10px;color:#999;">💬 '+(x.commentCount||0)+'</span><button onclick="showReply(\''+x.id+'\')" style="font-size:10px;">↩ Reply</button></div>'+
+        '<div class="reply-box hidden" id="rb-'+x.id+'"><input type="text" id="ri-'+x.id+'" placeholder="Reply..." onkeydown="if(event.key===\'Enter\')subReply(\''+x.id+'\')"><button onclick="subReply(\''+x.id+'\')">Send</button></div></div>';
+}
+function esc(t){return t?t.replace(/</g,'&lt;').replace(/>/g,'&gt;'):''}
+
+async function loadFeed(){
+    var d=document.getElementById('feedContent');d.innerHTML='<p style="text-align:center;color:#999;">Loading...</p>';
+    try{var r=await fetch(API+'/post/feed',{headers:{'Authorization':'Bearer '+token}});var p=await r.json();if(!p||p.length===0){d.innerHTML='<p style="text-align:center;color:#999;">No posts yet</p>';return}d.innerHTML=p.map(renderPost).join('')}catch(e){d.innerHTML='<p style="color:red;">Failed</p>'}
+}
+
+async function toggleLike(pid){
+    var btn=document.querySelector('#post-'+pid+' .actions button');
+    var liked=btn?btn.classList.contains('liked'):false;
+    try{await fetch(API+'/post/'+pid+'/like',{method:liked?'DELETE':'POST',headers:{'Authorization':'Bearer '+token}});loadFeed()}catch(e){}
+}
+
+async function editPost(pid){
+    var el=document.getElementById('cap-'+pid),old=el.textContent;
+    el.innerHTML='<input class="edit-input" id="ei-'+pid+'" value="'+old.replace(/"/g,'&quot;')+'"><button class="btn" style="width:auto;padding:4px 8px;font-size:11px;" onclick="saveEdit(\''+pid+'\')">Save</button><button class="btn" style="width:auto;padding:4px 8px;font-size:11px;background:#999;" onclick="loadFeed()">Cancel</button>';
+}
+async function saveEdit(pid){
+    var v=document.getElementById('ei-'+pid).value;
+    try{await fetch(API+'/post/'+pid,{method:'PUT',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({caption:v})});loadFeed()}catch(e){msg('msgArea2','Failed','error')}
+}
+async function deletePost(pid){
+    if(!confirm('Delete?'))return;
+    try{await fetch(API+'/post/'+pid,{method:'DELETE',headers:{'Authorization':'Bearer '+token}});loadFeed();msg('msgArea2','Deleted','success')}catch(e){msg('msgArea2','Failed','error')}
+}
+
+async function createPost(){
+    var c=document.getElementById('caption').value.trim();
+    if(!c){msg('msgArea2','Write something','error');return}
+    try{await fetch(API+'/post/create',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({caption:c,location:document.getElementById('location').value.trim()})});document.getElementById('caption').value='';document.getElementById('location').value='';msg('msgArea2','Posted!','success');showTab('feed')}catch(e){msg('msgArea2','Error','error')}
+}
+
+function showReply(pid){var b=document.getElementById('rb-'+pid);if(b){b.classList.toggle('hidden');if(!b.classList.contains('hidden'))document.getElementById('ri-'+pid).focus()}}
+async function subReply(pid){
+    var inp=document.getElementById('ri-'+pid),c=inp.value.trim();if(!c)return;
+    try{await fetch(API+'/post/'+pid+'/comment',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({content:c})});inp.value='';loadFeed()}catch(e){msg('msgArea2','Failed','error')}
+}
+
+async function searchUsers(){
+    var q=document.getElementById('searchQuery').value.trim(),div=document.getElementById('searchResults');
+    if(q.length<2){div.innerHTML='';return}
+    try{var r=await fetch(API+'/search/users?query='+encodeURIComponent(q));var d=await r.json();if(d.results&&d.results.length>0){allUsers=d.results;div.innerHTML=d.results.map(function(u){return'<div class="card" onclick="startChat(\''+u.id+'\',\''+u.username+'\')"><div class="name"><span class="online-dot"></span>👤 '+u.username+'</div><div>'+u.fullName+'</div><div style="color:var(--primary);font-size:10px;">💬 Click to chat</div></div>'}).join('')}else div.innerHTML='<p style="color:#999;text-align:center;">No users found</p>'}catch(e){div.innerHTML='<p style="color:red;">Search failed</p>'}
+}
+
+function startChat(uid,uname){chatUser={id:uid,username:uname};document.getElementById('convList').classList.add('hidden');document.getElementById('chatView').classList.remove('hidden');document.getElementById('chatUserName').textContent='💬 @'+uname;document.getElementById('chatMessages').innerHTML='';showTab('messages');loadMessages()}
+function backToConv(){document.getElementById('convList').classList.remove('hidden');document.getElementById('chatView').classList.add('hidden');chatUser=null}
+async function loadConversations(){
+    var d=document.getElementById('conversationsContent');
+    try{var r=await fetch(API+'/message/conversations',{headers:{'Authorization':'Bearer '+token}});var data=await r.json();if(!data||data.length===0){d.innerHTML='<p style="color:#999;text-align:center;">No chats yet</p>';return}d.innerHTML=data.map(function(c){return'<div class="card" onclick="startChat(\''+(c.userId||c.senderId)+'\',\''+(c.username||c.sender||'User')+'\')"><div class="name">👤 '+(c.username||c.sender||'User')+'</div></div>'}).join('')}catch(e){d.innerHTML='<p style="color:red;">Failed</p>'}
+}
+async function loadMessages(){
+    var d=document.getElementById('chatMessages');if(!chatUser)return;d.innerHTML='<p style="color:#999;">Loading...</p>';
+    try{var r=await fetch(API+'/message/conversation/'+chatUser.id,{headers:{'Authorization':'Bearer '+token}});var msgs=await r.json();if(!msgs||msgs.length===0){d.innerHTML='<p style="color:#999;text-align:center;">Say hello! 👋</p>';return}d.innerHTML=msgs.map(function(m){return'<div class="msg-bubble '+(m.senderId===user.id?'sent':'received')+'"><strong>'+m.senderUsername+':</strong> '+m.content+'</div>'}).join('');d.scrollTop=d.scrollHeight}catch(e){d.innerHTML='<p style="color:red;">Failed</p>'}
+}
+async function sendMsg(){
+    var inp=document.getElementById('chatInput'),c=inp.value.trim();if(!c||!chatUser)return;
+    try{await fetch(API+'/message/send',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({receiverId:chatUser.id,content:c})});inp.value='';loadMessages()}catch(e){msg('msgArea2','Failed','error')}
+}
+
+async function loadProfile(){
+    try{
+        var r=await fetch(API+'/auth/profile',{headers:{'Authorization':'Bearer '+token}});var p=await r.json();
+        document.getElementById('profileContent').innerHTML='<div class="card" style="text-align:center;"><div style="font-size:45px;">👤</div><h3>'+p.fullName+'</h3><p style="color:var(--primary);">@'+p.username+'</p><p>📧 '+p.email+'</p><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);"><div class="clickable" onclick="showUserPosts()" style="font-size:16px;"><strong>'+(p.postCount||0)+'</strong> Posts</div><small style="color:#999;">Click to view</small></div></div><div id="userPostsSection" class="hidden" style="margin-top:10px;"><h5>📄 Your Posts</h5><div id="userPostsList"></div></div>';
+    }catch(e){document.getElementById('profileContent').innerHTML='<p style="color:red;">Failed</p>'}
+}
+var upsVisible=false;
+async function showUserPosts(){
+    var s=document.getElementById('userPostsSection'),l=document.getElementById('userPostsList');
+    if(upsVisible){s.classList.add('hidden');upsVisible=false;return}
+    s.classList.remove('hidden');upsVisible=true;l.innerHTML='<p style="color:#999;">Loading...</p>';
+    try{var r=await fetch(API+'/post/user/'+user.id,{headers:{'Authorization':'Bearer '+token}});var p=await r.json();if(!p||p.length===0){l.innerHTML='<p style="color:#999;">No posts</p>';return}l.innerHTML=p.map(renderPost).join('')}catch(e){l.innerHTML='<p style="color:red;">Failed</p>'}
+}
+</script>
+</body>
+</html>
